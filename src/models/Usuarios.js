@@ -1,6 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 
+async function crypto(usuario){
+    usuario.senha = await bcrypt.hash(usuario.senha, 7);
+}
+
 class Usuarios extends Model {
     static init(connection) {
         super.init({
@@ -16,6 +20,9 @@ class Usuarios extends Model {
             sequelize: connection,
             tableName: 'usuarios',
             timestamps: false,
+            hooks: {
+                beforeCreate: crypto,
+            }
         })
     }
 

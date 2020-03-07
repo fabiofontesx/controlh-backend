@@ -26,7 +26,7 @@ module.exports = {
             return res.status(501).json({criado: false, mensagem: `O funcionário ${matricula} já existe`, funcionario});
         }
 
-        funcionario = ModelFuncionarios.create(nome, matricula, email, id_cargo, usuario);
+        funcionario = await ModelFuncionarios.create({nome, matricula, email, id_cargo, usuario});
         return res.status(201).json({criado: true, mensagem: 'Usuário criado com sucesso!'});
     },
 

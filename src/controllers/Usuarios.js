@@ -1,6 +1,7 @@
 const ModelUsuarios = require('../models/Usuarios');
 const ModelFuncionarios = require('../models/Funcionarios');
 
+const bcrypt = require('bcrypt');
 const { Op }  = require( 'sequelize');
 const jwt = require('jsonwebtoken');
 
@@ -9,7 +10,7 @@ module.exports = {
         const { usuario, senha } = req.body;
         const usuarioLogin = await ModelUsuarios.findOne({
             where: {
-                [Op.and]: [{usuario}, {senha}]
+                [Op.and]: [{usuario}]
             },
         });
 
@@ -17,6 +18,13 @@ module.exports = {
             return res.status(404).json({auth: false, erro: 'Usuario não existe'});
         }
         
+        try{ 
+            const resSenha = await bcrypt.compare(senha, usuarioLogin.senha);
+            console.log(resSenha);
+        }catch(e){
+            console.log(e);
+        }
+
         const funcionario = await usuarioLogin.getFuncionario({
             attributes:['id', 'matricula', 'id_cargo']
         });
