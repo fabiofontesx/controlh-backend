@@ -15,7 +15,7 @@ module.exports = {
     },
     
     async store(req, res){
-        const { nome, matricula, email, id_cargo } = req.body;
+        const { nome, matricula, email, id_cargo, usuario } = req.body;
 
         let funcionario = await ModelFuncionarios.findOne({
             where: {
@@ -26,7 +26,15 @@ module.exports = {
             return res.status(501).json({criado: false, mensagem: `O funcionário ${matricula} já existe`, funcionario});
         }
 
-        funcionario = ModelFuncionarios.create(nome, matricula, email, id_cargo);
+        funcionario = ModelFuncionarios.create(nome, matricula, email, id_cargo, usuario);
         return res.status(201).json({criado: true, mensagem: 'Usuário criado com sucesso!'});
+    },
+
+    async getAll(req, res){
+        const funcionarios = await ModelFuncionarios.findAll({
+            include: {association: 'cargo', attributes:['descricao']},
+            attributes:['id', 'nome', 'matricula',  'email']
+        });
+        return res.status(200).json({funcionarios});
     }
 }

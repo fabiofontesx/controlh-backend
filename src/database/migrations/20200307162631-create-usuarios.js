@@ -17,16 +17,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      funcionario_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'funcionarios',
-          key: 'id'
-        },
-        onUpdate: 'cascade',
-        onDelete: 'cascade'
-      },
     })
   },
 

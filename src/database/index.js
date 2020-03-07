@@ -13,5 +13,4 @@ Usuarios.init(connection);
 Funcionarios.associate(connection.models);
 Cargos.associate(connection.models);
 Usuarios.associate(connection.models);
-
 module.exports = connection;

@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
 
 class Usuarios extends Model {
     static init(connection) {
@@ -14,12 +15,15 @@ class Usuarios extends Model {
         }, {
             sequelize: connection,
             tableName: 'usuarios',
+            timestamps: false,
         })
     }
 
+
     static associate(models){
-        this.belongsTo(models.Funcionarios, { foreignKey: 'funcionario_id', as: 'funcionario'})
+        this.hasOne(models.Funcionarios, { foreignKey: 'id_usuario', as: 'funcionario'});
     }
+
 
 }
 

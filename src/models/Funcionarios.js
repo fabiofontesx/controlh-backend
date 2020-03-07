@@ -23,8 +23,7 @@ class Funcionarios extends Model {
     }
 
     static associate(models){
-        this.belongsTo(models.Cargos, { foreignKey: 'id_cargo', as: 'cargo'})
-        this.hasOne(models.Usuarios, {as: 'usuario'})
+        this.belongsTo(models.Cargos, { foreignKey: 'id_cargo', as: 'cargo'});
     }
 }
 
