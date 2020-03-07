@@ -18,11 +18,9 @@ module.exports = {
             return res.status(404).json({auth: false, erro: 'Usuario não existe'});
         }
         
-        try{ 
-            const resSenha = await bcrypt.compare(senha, usuarioLogin.senha);
-            console.log(resSenha);
-        }catch(e){
-            console.log(e);
+        const senhaMatches = await bcrypt.compare(senha, usuarioLogin.senha);
+        if(!senhaMatches){
+            return res.status(401).json({auth: false, erro: 'Senha incorreta'});
         }
 
         const funcionario = await usuarioLogin.getFuncionario({
