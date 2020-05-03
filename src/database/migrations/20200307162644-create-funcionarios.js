@@ -31,15 +31,7 @@ module.exports = {
         onUpdate: 'cascade',
         onDelete: 'cascade'
       },
-      id_usuario: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'usuarios',
-          key: 'id'
-        },
-        onUpdate: 'cascade',
-        onDelete: 'cascade'
-      },
+            
 
     })
   },

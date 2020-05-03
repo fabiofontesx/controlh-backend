@@ -22,13 +22,14 @@ class Usuarios extends Model {
             timestamps: false,
             hooks: {
                 beforeCreate: crypto,
+                beforeUpdate: crypto
             }
         })
     }
 
 
     static associate(models){
-        this.hasOne(models.Funcionarios, { foreignKey: 'id_usuario', as: 'funcionario'});
+        this.belongsTo(models.Funcionarios, { foreignKey: 'id_funcionario', as: 'funcionario'});
     }
 
 

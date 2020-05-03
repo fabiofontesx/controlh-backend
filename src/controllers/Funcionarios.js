@@ -1,4 +1,5 @@
 const ModelFuncionarios = require('../models/Funcionarios');
+
 const { Op } = require('sequelize');
 module.exports = {
     async findByMatricula(req, res){
@@ -36,5 +37,7 @@ module.exports = {
             attributes:['id', 'nome', 'matricula',  'email']
         });
         return res.status(200).json({funcionarios});
-    }
+    },
+
+    
 }

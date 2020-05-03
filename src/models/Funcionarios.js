@@ -14,6 +14,10 @@ class Funcionarios extends Model {
             email: {
                 type: DataTypes.STRING,
                 allowNull: false
+            }, 
+            avatar: {
+                type: DataTypes.TEXT('long'),
+                allowNull: true
             }
         }, {
             sequelize: connection,
@@ -24,6 +28,10 @@ class Funcionarios extends Model {
 
     static associate(models){
         this.belongsTo(models.Cargos, { foreignKey: 'id_cargo', as: 'cargo'});
+        this.hasOne(models.Usuarios, {foreignKey: 'id_funcionario', as: 'usuario'});
+        this.belongsToMany(models.Projetos, {foreignKey: 'id_funcionario', as: 'projetos', through: 'projeto_funcionario', timestamps:false})
+        
+        this.hasMany(models.Apontamentos, {foreignKey: 'id_funcionario', as: 'apontamentos'});
     }
 }
 
