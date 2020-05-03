@@ -1,7 +1,7 @@
 module.exports = { 
     dialect: 'mysql',
-    host: '172.17.0.2',
-    username: 'root',
-    password: 'F@bio3564',
-    database: 'apontamentos'
+    host: process.env.MYSQL_HOST,
+    username: process.env.MYSQl_USER,
+    password: process.env.MYSQl_PASSWORD,
+    database: process.env.MYSQl_DATABASE
 }
