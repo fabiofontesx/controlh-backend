@@ -1,3 +1,4 @@
+require('dotenv').config();
 const Sequelize = require('sequelize');
 const databaseConfig = require('../config/database');
 
@@ -8,7 +9,8 @@ const Empresas = require('../models/Empresas');
 const Projetos = require('../models/Projetos');
 const Apontamentos = require('../models/Apontamentos')
 
-const connection = new Sequelize(databaseConfig);
+
+const connection  = new Sequelize(process.env.NODE_ENV ? databaseConfig.production : databaseConfig.development);
 
 Cargos.init(connection);
 Funcionarios.init(connection);
