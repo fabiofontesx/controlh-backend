@@ -36,7 +36,7 @@ module.exports = {
     },
 
     async store(req, res){
-        const { matricula, senha, usuario } = req.body;
+        const { matricula, senha, usuario, avatar } = req.body;
         const funcionarioExists = await ModelFuncionarios.findOne({
             where: { matricula }
         });
@@ -50,7 +50,7 @@ module.exports = {
             return res.status(406).json({criado: false, erro: `O funcionário ${matricula} já possui um usuário cadastrado`});
         }
 
-        const usuarioCriado = await ModelUsuarios.create({usuario, senha});
+        const usuarioCriado = await ModelUsuarios.create({usuario, senha, avatar});
         await usuarioCriado.setFuncionario(funcionarioExists);
         return res.status(201).json({criado: true});
     },

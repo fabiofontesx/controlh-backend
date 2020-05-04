@@ -11,7 +11,7 @@ const ControllerApontamentos = require('./controllers/Apontamentos');
 
 
 routes.get('/funcionarios/:matricula', JwtManager.verifyToken, ControllerFuncionarios.findByMatricula);
-routes.post('/funcionarios/', JwtManager.verifyToken, ControllerFuncionarios.store);
+routes.post('/funcionarios/', ControllerFuncionarios.store);
 routes.get('/funcionarios/', JwtManager.verifyToken, ControllerFuncionarios.getAll);
 
 
